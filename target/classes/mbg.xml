@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<!-- mybatis-generator:generate 命令运行， 生成代码-->
+<generatorConfiguration>
+ 	<!-- oracle 连 接 
+	<classPathEntry location="E:\app\Administrator\product\11.2.0\dbhome_1\jdbc\lib\ojdbc6.jar" />
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+			connectionURL="jdbc:oracle:thin:@localhost:1521:orcl" userId="myBatis"
+			password="123456">
+		</jdbcConnection>
+	-->
+	<!-- mysql 连接数据库的驱动  -->
+	<classPathEntry location="E:\mysql-connector-java-5.1.26.jar"/>
+	<!-- 设置生成代码的规则 , targetRuntime开发环境使用的Mybatis的版本  -->
+	<context id="DB2Tables" targetRuntime="MyBatis3">
+		<!-- 添加分页工具 -->
+		<plugin type="org.mybatis.generator.plugins.RowBoundsPlugin"></plugin>
+		<!-- 配置连接数据库四要素 -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			connectionURL="jdbc:mysql://localhost:3306/test" userId="root"
+			password="123456">
+		</jdbcConnection>
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+		<!-- 生成的实体类bean的位置 带有get和set方法 -->
+		<javaModelGenerator targetPackage="cn.et.entity"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+		<!-- 生成的sql语句相关的xml或者注解 的位置路径 -->
+		<sqlMapGenerator targetPackage="cn.et.resource"
+			targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+		<!-- 生成的接口的位置 -->
+		<javaClientGenerator type="ANNOTATEDMAPPER"
+			targetPackage="cn.et.dao" targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+		<!-- 告诉mbg 需要生成代码的表 -->
+		<table tableName="emp">
+		</table>
+	</context>
+</generatorConfiguration>
